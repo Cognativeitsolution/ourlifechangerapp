@@ -125,6 +125,7 @@ class _YoutubePlayerScreenState extends State<YoutubePlayerScreen> {
     if (response.statusCode == 200) {
       print("Video Status: " + jsonDecode(response.body).toString());
       earningAmount();
+      sendEarningData();
       return jsonDecode(response.body);
     } else {
       throw Exception("Your video limit has exceeded.");
