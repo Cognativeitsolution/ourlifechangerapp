@@ -198,7 +198,7 @@ class _withhDrawlHistoryState extends State<WithDrawlHistory> {
                     }
                     if (snapshot.hasError) {
                       return const CustomText(
-                        text: "Fail To Get Data",
+                        text: "No Data Avaliable",
                       );
                     }
                     return const Center(

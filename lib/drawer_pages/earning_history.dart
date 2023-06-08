@@ -184,7 +184,7 @@ class _EarningHistoryState extends State<EarningHistory> {
                     }
                     if (snapshot.hasError) {
                       return const CustomText(
-                        text: "Fail To Get Data",
+                        text: "No Data avaliable",
                       );
                     }
                     return const Center(

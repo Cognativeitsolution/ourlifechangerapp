@@ -161,8 +161,7 @@ class _DepositHistoryState extends State<DepositHistory> {
                                           child: CustomText(
                                               text: data[index].status == 1
                                                   ? "Status:  " + "Complete"
-                                                  : "Status: " + "Pending"
-                                                  ),
+                                                  : "Status: " + "Pending"),
                                         ), //Third Row
                                         SizedBox(
                                           height: 5,
@@ -186,7 +185,7 @@ class _DepositHistoryState extends State<DepositHistory> {
                     }
                     if (snapshot.hasError) {
                       return const CustomText(
-                        text: "Fail To Get Data",
+                        text: "No Data Avaliable",
                       );
                     }
                     return const Center(
