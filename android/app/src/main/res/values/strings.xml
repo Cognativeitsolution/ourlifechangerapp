@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">lifechangerapp</string>
+<string name="facebook_app_id">6814806275201746</string>
+<string name="fb_login_protocol_scheme">fb6814806275201746</string>
+<string name="facebook_client_token">4447376f24f81989e63d0f9c0bc715d3</string>
+</resources>
+
