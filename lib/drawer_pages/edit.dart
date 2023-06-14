@@ -95,13 +95,12 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 SizedBox(height: 30),
                 CustomButton(
-                    onTap: () {
-                      // updateImage();
+                    onTap: () async {
+                      // upload();
                       if (imagePath == null) {
                       } else {
                         setState(() {});
                         upload();
-                        print("object");
                       }
                     },
                     buttonText: "Update Profile",
@@ -237,7 +236,7 @@ class _EditProfileState extends State<EditProfile> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Profile()));
     } else {
-      print("Error uploading");
+      print("Error");
       Navigator.of(context, rootNavigator: true).pop('dialog');
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(
