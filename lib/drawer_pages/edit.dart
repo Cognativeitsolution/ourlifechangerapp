@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:lifechangerapp/common/custom_dialogue.dart';
+import 'package:lifechangerapp/common/custom_text.dart';
+import 'package:lifechangerapp/common/custom_textfield.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 import '../api/app_utils.dart';
@@ -21,6 +23,11 @@ class EditProfile extends StatefulWidget {
 
 var token;
 
+final _name = TextEditingController();
+final _email = TextEditingController();
+final _number = TextEditingController();
+final _secemail = TextEditingController();
+
 String apiUrl = "https://backend.ourlifechanger.com/public/api/edit-profile";
 
 class _EditProfileState extends State<EditProfile> {
@@ -34,45 +41,74 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    _name.value = TextEditingValue(text: widget.profile.name);
+    _email.value = TextEditingValue(text: widget.profile.email);
+    _number.value = TextEditingValue(text: widget.profile.contact);
+    _secemail.value = TextEditingValue(text: widget.profile.secemail!);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Mycolors.darkPurple,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Center(
-              child: GestureDetector(
-                onTap: showSelectionDialog,
-                child: Container(
-                  height: 250,
-                  width: 250,
-                  child: CircleAvatar(
-                    backgroundColor: Mycolors.lightPurple,
-                    backgroundImage: imagePath == null
-                        ? NetworkImage(
-                            "https://backend.ourlifechanger.com/public/images/${widget.profile.image}")
-                        : FileImage(imagePath!) as ImageProvider,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: GestureDetector(
+                    onTap: showSelectionDialog,
+                    child: Container(
+                      height: 250,
+                      width: 250,
+                      child: CircleAvatar(
+                        backgroundColor: Mycolors.lightPurple,
+                        backgroundImage: imagePath == null
+                            ? NetworkImage(
+                                "https://backend.ourlifechanger.com/public/images/${widget.profile.image}")
+                            : FileImage(imagePath!) as ImageProvider,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                SizedBox(height: 30),
+                CustomTextField(
+                  controller: _name,
+                ),
+                SizedBox(height: 15),
+                CustomTextField(
+                  controller: _email,
+                ),
+                SizedBox(height: 15),
+                CustomTextField(
+                  controller: _number,
+                ),
+                SizedBox(height: 15),
+                CustomTextField(
+                  controller: _secemail,
+                ),
+                SizedBox(height: 30),
+                CustomButton(
+                    onTap: () {
+                      // updateImage();
+                      if (imagePath == null) {
+                      } else {
+                        setState(() {});
+                        upload();
+                        print("object");
+                      }
+                    },
+                    buttonText: "Update Profile",
+                    sizeWidth: double.infinity),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: CustomButton(
-                  onTap: () {
-                    // updateImage();
-                    if (imagePath == null) {
-                    } else {
-                      setState(() {});
-                      upload();
-                      print("object");
-                    }
-                  },
-                  buttonText: "Update Profile",
-                  sizeWidth: double.infinity),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -162,6 +198,10 @@ class _EditProfileState extends State<EditProfile> {
 
     Map<String, String> infoData = {
       '_method': 'PUT',
+      'name': '$_name',
+      'email': '$_email',
+      'contact': '$_number',
+      'secondary_email': '$_secemail',
     };
 
     var fileExtension = AppUtils.getFileExtension(imageFile.toString());

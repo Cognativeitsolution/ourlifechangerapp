@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../colors/colors.dart';
 
-
 class CustomTextField extends StatefulWidget {
   final TextInputType? textInputType;
   final String? hintText;
