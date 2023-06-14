@@ -36,9 +36,7 @@ class ProfileState extends State<Profile> {
   }
 
   SharedPreferences? prefs;
-  _getToken() async {
-    
-  }
+  _getToken() async {}
 
   //get Payment data functaion
   Future<AccountDetails> getaccountdetails() async {
@@ -185,7 +183,7 @@ class ProfileState extends State<Profile> {
                           borderRadius: BorderRadius.circular(15),
                           color: Mycolors.lightPurple,
                         ),
-                        height: 180,
+                        height: 200,
                         child: Padding(
                           padding: const EdgeInsets.all(10),
                           child: Column(
@@ -225,6 +223,17 @@ class ProfileState extends State<Profile> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
+                                  const CustomText(text: "Name :"),
+                                  CustomText(text: data[index].name)
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
                                   const CustomText(text: "Email :"),
                                   CustomText(text: data[index].email)
                                 ],
@@ -239,7 +248,18 @@ class ProfileState extends State<Profile> {
                                   const CustomText(text: "Contact :"),
                                   CustomText(text: data[index].contact)
                                 ],
-                              )
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const CustomText(text: "Email :"),
+                                  CustomText(text: data[index].secemail!)
+                                ],
+                              ),
                             ],
                           ),
                         ),

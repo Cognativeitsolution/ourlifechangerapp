@@ -5,6 +5,7 @@ class ProfileData {
   String contact;
   String package;
   String image;
+  String? secemail;
 
   ProfileData(
       {required this.name,
@@ -12,17 +13,18 @@ class ProfileData {
       required this.username,
       required this.contact,
       required this.package,
-      required this.image});
+      required this.image,
+      this.secemail});
 
   factory ProfileData.fromJson(Map<String, dynamic> json) {
     return ProfileData(
-      name: json['name'],
-      email: json['email'],
-      username: json['user_name'],
-      contact: json['contact'],
-      package: json['package_name'],
-      image: json['image'],
-    );
+        name: json['name'],
+        email: json['email'],
+        username: json['user_name'],
+        contact: json['contact'],
+        package: json['package_name'],
+        image: json['image'],
+        secemail: json['secondary_email']);
   }
 
   Map<String, dynamic> toJson() => {
@@ -32,5 +34,6 @@ class ProfileData {
         "contact": contact,
         "package_name": package,
         "image": image,
+        "secondary_email": secemail
       };
 }
