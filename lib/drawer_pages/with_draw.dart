@@ -66,26 +66,34 @@ class WithDrawState extends State<WithDraw> {
         'ip_address': ipv4,
       }),
     );
-
-    if (response.statusCode == 200) {
+    print("Response withdraw:" + json.decode(response.body).toString());
+    var bod = json.decode(response.body);
+    if (bod['success'] == true) {
+      print("done");
       Navigator.of(context, rootNavigator: true).pop('dialog');
       print("Response withdraw:" + json.decode(response.body).toString());
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Withdrawl Successfull'),
+        SnackBar(
+          content: Text(bod['message'].toString()),
         ),
       );
-      return Withdraw.fromJson(json.decode(response.body));
-    } else {
+    } else if (bod['success'] == false) {
+      print("shit");
       Navigator.of(context, rootNavigator: true).pop('dialog');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Withdrawl Error'),
+        SnackBar(
+          content: Text("" + bod['message'].toString()),
         ),
       );
       print("Exception");
       throw Exception("Exception Error");
     }
+    return Withdraw.fromJson(json.decode(response.body));
+    // if (response.statusCode == 200) {
+
+    // } else {
+
+    // }
   }
 
   List<DropdownMenuItem<String>> get dropdownItemsFrom {

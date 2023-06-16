@@ -43,10 +43,11 @@ class _EditProfileState extends State<EditProfile> {
   @override
   void initState() {
     // TODO: implement initState
-    _name.value = TextEditingValue(text: widget.profile.name);
-    _email.value = TextEditingValue(text: widget.profile.email);
-    _number.value = TextEditingValue(text: widget.profile.contact);
-    _secemail.value = TextEditingValue(text: widget.profile.secemail!);
+    _name.text = widget.profile.name.toString();
+    print("name: " + _name.value.toString());
+    _email.text = widget.profile.email.toString();
+    _number.text = widget.profile.contact == null ? "None" : "something";
+    _secemail.text = widget.profile.secemail == null ? "None" : "something";
     super.initState();
   }
 
@@ -197,10 +198,10 @@ class _EditProfileState extends State<EditProfile> {
 
     Map<String, String> infoData = {
       '_method': 'PUT',
-      'name': '$_name',
-      'email': '$_email',
-      'contact': '$_number',
-      'secondary_email': '$_secemail',
+      'name': _name.text,
+      'email': _email.text,
+      'contact': '123456',
+      'secondary_email': '123456',
     };
 
     var fileExtension = AppUtils.getFileExtension(imageFile.toString());

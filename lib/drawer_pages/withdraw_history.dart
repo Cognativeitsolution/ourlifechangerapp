@@ -165,7 +165,7 @@ class _withhDrawlHistoryState extends State<WithDrawlHistory> {
                                           alignment: Alignment.topLeft,
                                           child: CustomText(
                                               text:
-                                                  "Deposit Amount:  ${data[index].debit}"),
+                                                  "Withdraw Amount:  ${data[index].debit}"),
                                         ),
                                         SizedBox(
                                           height: 5,

@@ -35,6 +35,7 @@ class ProfileState extends State<Profile> {
     _getToken();
   }
 
+  int? g_sign;
   SharedPreferences? prefs;
   _getToken() async {}
 
@@ -42,6 +43,7 @@ class ProfileState extends State<Profile> {
   Future<AccountDetails> getaccountdetails() async {
     prefs = await SharedPreferences.getInstance();
     token = prefs!.getString('session_token');
+    g_sign = prefs!.getInt("googleSign");
     var response = await http.get(
       Uri.parse(accountapiUrl),
       headers: <String, String>{
@@ -186,84 +188,89 @@ class ProfileState extends State<Profile> {
                         height: 200,
                         child: Padding(
                           padding: const EdgeInsets.all(10),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CustomText(
-                                    text: data[index].name,
-                                    fontSize: 20,
-                                  ),
-                                  CustomText(
-                                    text: data[index].package,
-                                    fontSize: 25,
-                                    textColor: Mycolors.yellow,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ],
-                              ),
-                              const Divider(
-                                thickness: 3,
-                                color: Mycolors.yellow,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const CustomText(text: "Username :"),
-                                  CustomText(text: data[index].username)
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const CustomText(text: "Name :"),
-                                  CustomText(text: data[index].name)
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const CustomText(text: "Email :"),
-                                  CustomText(text: data[index].email)
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const CustomText(text: "Contact :"),
-                                  CustomText(text: data[index].contact)
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const CustomText(text: "Email :"),
-                                  CustomText(
-                                      text: data[index].secemail == null
-                                          ? " "
-                                          : data[index].secemail.toString()),
-                                ],
-                              ),
-                            ],
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CustomText(
+                                      text: g_sign==1? data[index].username:data[index].name,
+                                      fontSize: 20,
+                                    ),
+                                    CustomText(
+                                      text: data[index].package,
+                                      fontSize: 25,
+                                      textColor: Mycolors.yellow,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ],
+                                ),
+                                const Divider(
+                                  thickness: 3,
+                                  color: Mycolors.yellow,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const CustomText(text: "Username :"),
+                                    CustomText(text: data[index].username)
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const CustomText(text: "Name :"),
+                                    CustomText(text: data[index].name)
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const CustomText(text: "Email :"),
+                                    CustomText(text: data[index].email)
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const CustomText(text: "Contact :"),
+                                    CustomText(
+                                        text: data[index].contact == null
+                                            ? "None"
+                                            : data[index].contact.toString())
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const CustomText(text: "Email :"),
+                                    CustomText(
+                                        text: data[index].secemail == null
+                                            ? "None"
+                                            : data[index].secemail.toString()),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

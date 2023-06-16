@@ -40,6 +40,16 @@ class _DepositHistoryState extends State<DepositHistory> {
         .toList();
   }
 
+  SharedPreferences? prefs;
+  int? g_sign;
+  _getPrefsData() async {
+    prefs = await SharedPreferences.getInstance();
+
+    g_sign = prefs!.getInt("googleSign");
+    // p_img_path = prefs!.getString("img_path");
+    // print("imgPath in home: " + p_img_path);
+  }
+
   var statusText;
   @override
   Widget build(BuildContext context) {
@@ -75,13 +85,8 @@ class _DepositHistoryState extends State<DepositHistory> {
                           shrinkWrap: true,
                           itemCount: data.length,
                           itemBuilder: (context, index) {
-                            // setState(() {
-                            //   if (data[index].status == 1) {
-                            //     statusText = "Complete";
-                            //   } else {
-                            //     statusText = "Pending";
-                            //   }
-                            // });
+                            _getPrefsData();
+
                             return Padding(
                               padding: const EdgeInsets.symmetric(vertical: 6),
                               child: SizedBox(
@@ -114,12 +119,14 @@ class _DepositHistoryState extends State<DepositHistory> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              CustomText(
-                                                text: data[index]
-                                                    .user
-                                                    .toUpperCase(),
-                                                textColor: Mycolors.darkPurple,
-                                                fontWeight: FontWeight.bold,
+                                              Text(
+                                                g_sign == 1
+                                                    ? "Google User"
+                                                    : " ${data[index].user}",
+                                                style: TextStyle(
+                                                  color: Mycolors.darkPurple,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                             ],
                                           ),
