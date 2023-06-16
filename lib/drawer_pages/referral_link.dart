@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_share/flutter_share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -37,12 +37,8 @@ class ReferralState extends State<Referral> {
   dynamic refList = [];
   dynamic childList = [];
 
-  Future<void> share() async {
-    await FlutterShare.share(
-        title: 'App Name Refer Link',
-        text: "'App Name Refer Link",
-        linkUrl: refLink,
-        chooserTitle: 'Example Chooser Title');
+  share() {
+    Share.share(refLink, subject: "Our Life changer App");
   }
 
   var userName;

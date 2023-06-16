@@ -257,7 +257,10 @@ class ProfileState extends State<Profile> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const CustomText(text: "Email :"),
-                                  CustomText(text: data[index].secemail!)
+                                  CustomText(
+                                      text: data[index].secemail == null
+                                          ? " "
+                                          : data[index].secemail.toString()),
                                 ],
                               ),
                             ],
