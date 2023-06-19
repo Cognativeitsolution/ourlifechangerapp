@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, unrelated_type_equality_checks, unnecessary_new, prefer_interpolation_to_compose_strings, use_build_context_synchronously, avoid_print
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lifechangerapp/api/fb_api.dart';
 import 'package:lifechangerapp/colors/colors.dart';
+import 'package:lifechangerapp/common/common_info.dart';
 import 'package:lifechangerapp/common/custom_dialogue.dart';
 import 'package:lifechangerapp/home_pages/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -104,10 +106,18 @@ class _LoginPageState extends State<LoginPage> {
       'password': _password.text,
     };
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var res = await CallApi().postData(data, 'login');
-    // var resEmail = await CallApi().postData(dataEmail, 'resendCode');
+    var res, body;
+    try {
+      res = await CallApi().postData(data, 'login');
+      // var resEmail = await CallApi().postData(dataEmail, 'resendCode');
 
-    var body = jsonDecode(res.body);
+      body = jsonDecode(res.body);
+    } on Exception catch (_, e) {
+      print("checkNet " + e.toString());
+      CustomProgressDialogue.showAlertDialog(
+          context, "Internet Connection", "You have no internet Connection");
+      // Navigator.of(context, rootNavigator: true).pop('dialog');
+    }
 
     //var bodyEmail = jsonDecode(resEmail.body);
 

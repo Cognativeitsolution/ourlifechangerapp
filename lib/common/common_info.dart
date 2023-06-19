@@ -1,3 +1,5 @@
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+
 class Info {
   var ip, os, browser, device, time;
   Info(
@@ -32,12 +34,6 @@ class Refers {
       this.eDate]);
 }
 
-class Withdraw_History {
-  var sn, transactionID, paymentGateway, dt, status;
-  Withdraw_History(
-      [this.sn, this.transactionID, this.paymentGateway, this.dt, this.status]);
-}
-
 class Deposit_History {
   var sn, transactionID, amount, paymentGateway, dt, status;
   Deposit_History(
@@ -49,22 +45,15 @@ class Deposit_History {
       this.status]);
 }
 
-class Earning_History {
-  var sn,
-      transactionID,
-      amount,
-      account,
-      fundedAmount,
-      paymentGateway,
-      dt,
-      status;
-  Earning_History(
-      [this.sn,
-      this.transactionID,
-      this.amount,
-      this.account,
-      this.fundedAmount,
-      this.paymentGateway,
-      this.dt,
-      this.status]);
+class checkInternet {
+  static Future<bool> checkNet() async {
+    bool result = await InternetConnectionChecker().hasConnection;
+    // if (result == true) {
+    //   print('YAY! Free cute dog pics!');
+    // } else {
+    //   print('No internet :( Reason:');
+    //   //print(InternetConnectionChecker().lastTryResults);
+    // }
+    return result;
+  }
 }
