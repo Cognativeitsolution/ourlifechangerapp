@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_new, prefer_const_literals_to_create_immutables, sort_child_properties_last, prefer_const_constructors, use_build_context_synchronously, non_constant_identifier_names, prefer_interpolation_to_compose_strings, unused_local_variable, unnecessary_import
+// ignore_for_file: unnecessary_new, prefer_const_literals_to_create_immutables, sort_child_properties_last, prefer_const_constructors, use_build_context_synchronously, non_constant_identifier_names, prefer_interpolation_to_compose_strings, unused_local_variable, unnecessary_import, prefer_is_not_empty
 
 import 'dart:convert';
 
@@ -149,9 +149,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               'Full Name',
                               Icon(Icons.person),
                             ),
+                            maxLength: 30,
                             validator: (val) {
-                              if (val!.isEmpty)
-                                return "Please enter your full name";
+                              if ((val!.isEmpty)) {
+                                return "Name cannot be empty";
+                              } else if (!RegExp(
+                                      r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$")
+                                  .hasMatch(val)) {
+                                return "Enter a valid name";
+                              }
+                              return null;
                             },
                             onChanged: (val) {
                               name = _name.text;
@@ -172,9 +179,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             ),
                             keyboardType: TextInputType.emailAddress,
                             validator: (val) {
-                              if (!(val!.isEmpty) &&
-                                  !RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
-                                      .hasMatch(val)) {
+                              if ((val!.isEmpty)) {
+                                return "Email cannot be empty";
+                              } else if (!RegExp(
+                                      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$")
+                                  .hasMatch(val)) {
                                 return "Enter a valid email address";
                               }
                               return null;
