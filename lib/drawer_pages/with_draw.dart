@@ -85,8 +85,8 @@ class WithDrawState extends State<WithDraw> {
           content: Text("" + bod['message'].toString()),
         ),
       );
-      print("Exception");
-      throw Exception("Exception Error");
+      //print("Exception");
+      //throw Exception("Exception Error");
     }
     return Withdraw.fromJson(json.decode(response.body));
     // if (response.statusCode == 200) {
@@ -314,7 +314,7 @@ class WithDrawState extends State<WithDraw> {
                         decoration: InputDecoration(
                             // labelText: 'Amount',
                             // labelStyle: TextStyle(color: Colors.white),
-                            hintText: 'Enter amount to deposit',
+                            hintText: 'Enter amount to withdraw',
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder()),
                         keyboardType: TextInputType.number,
