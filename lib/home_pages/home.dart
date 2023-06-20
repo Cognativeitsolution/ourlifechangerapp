@@ -54,6 +54,7 @@ class homeState extends State<Home> {
     _getPrefsData();
   }
   _signOutApi() async {
+      _getPrefsData();
     CustomProgressDialogue.progressDialogue(context);
     if (g_sign == 1) {
       await GoogleSignInApi.logout();
@@ -86,6 +87,7 @@ class homeState extends State<Home> {
   var count;
   dynamic annoucementList = [];
   Future<void> _getObjectives() async {
+    //  _getPrefsData();
     SharedPreferences preferences = await SharedPreferences.getInstance();
     //token = "602|CzOAqewpH0zVl6AIhXvjfCjCKpOicsNLbXQK0MKm";
     token = preferences.getString("session_token");
