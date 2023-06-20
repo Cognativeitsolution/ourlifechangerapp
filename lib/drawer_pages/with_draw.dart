@@ -247,20 +247,26 @@ class WithDrawState extends State<WithDraw> {
                         height: 10,
                       ),
                       TextFormField(
-                        controller: accountNameController,
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                            // labelText: 'Amount',
-                            // labelStyle: TextStyle(color: Colors.white),
-                            hintText: 'Enter Account Name',
-                            hintStyle: TextStyle(color: Colors.grey),
-                            border: OutlineInputBorder()),
-                        keyboardType: TextInputType.visiblePassword,
-                        validator: ((value) {
-                          if (value!.isEmpty)
-                            return "Please enter account name";
-                        }),
-                      ),
+                          controller: accountNameController,
+                          style: TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                              // labelText: 'Amount',
+                              // labelStyle: TextStyle(color: Colors.white),
+                              hintText: 'Enter Account Name',
+                              hintStyle: TextStyle(color: Colors.grey),
+                              border: OutlineInputBorder()),
+                          maxLength: 20,
+                          keyboardType: TextInputType.visiblePassword,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please enter account name";
+                            } else if (!RegExp(
+                                    r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$")
+                                .hasMatch(value)) {
+                              return "Enter a valid name";
+                            }
+                            return null;
+                          }),
                       SizedBox(
                         height: 20,
                       ),
@@ -286,7 +292,7 @@ class WithDrawState extends State<WithDraw> {
                             hintText: 'Enter Account number',
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder()),
-                        keyboardType: TextInputType.visiblePassword,
+                        keyboardType: TextInputType.number,
                         validator: ((value) {
                           if (value!.isEmpty)
                             return "Please enter account number";
@@ -318,6 +324,7 @@ class WithDrawState extends State<WithDraw> {
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder()),
                         keyboardType: TextInputType.number,
+                        maxLength: 10,
                         validator: ((value) {
                           if (value!.isEmpty) return "Please enter some amount";
                         }),

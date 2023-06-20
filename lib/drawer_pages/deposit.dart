@@ -187,6 +187,7 @@ class DepositBalanceState extends State<DepositBalance> {
                             hintText: 'Enter amount to deposit',
                             hintStyle: TextStyle(color: Colors.grey.shade400),
                             border: OutlineInputBorder()),
+                        maxLength: 10,
                         keyboardType: TextInputType.number,
                         validator: ((value) {
                           if (value!.isEmpty) return "Please enter some amount";
@@ -205,6 +206,7 @@ class DepositBalanceState extends State<DepositBalance> {
                             hintStyle: TextStyle(color: Colors.grey.shade400),
                             border: OutlineInputBorder()),
                         keyboardType: TextInputType.number,
+                        maxLength: 15,
                         validator: ((value) {
                           if (value!.isEmpty) return "Please enter some value";
                         }),
